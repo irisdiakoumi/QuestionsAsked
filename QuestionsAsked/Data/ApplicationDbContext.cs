@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using QuestionsAsked.Models;
 
 namespace QuestionsAsked.Data
 {
@@ -9,5 +10,6 @@ namespace QuestionsAsked.Data
             : base(options)
         {
         }
+        public DbSet<QuestionsAsked.Models.QAPair> QAPair { get; set; }
     }
 }
