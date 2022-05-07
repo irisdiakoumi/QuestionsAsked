@@ -38,8 +38,8 @@ namespace QuestionsAsked.Controllers
             return View("Index",await _context.QAPair.Where(q => q.Question.Contains(SearchPhrase))  .ToListAsync());
         }
 
-        // GET: QAPairs/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: QAPairs/Answer/5
+        public async Task<IActionResult> Answer(int? id)
         {
             if (id == null)
             {
