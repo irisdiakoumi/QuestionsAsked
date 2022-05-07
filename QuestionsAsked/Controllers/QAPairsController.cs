@@ -26,6 +26,18 @@ namespace QuestionsAsked.Controllers
             return View(await _context.QAPair.ToListAsync());
         }
 
+        // GET: QAPairs/SearchForm
+        public async Task<IActionResult> SearchForm()
+        {
+            return View();
+        }
+
+        // POST: QAPairs/SearchResults
+        public async Task<IActionResult> SearchResults(string SearchPhrase)
+        {
+            return View("Index",await _context.QAPair.Where(q => q.Question.Contains(SearchPhrase))  .ToListAsync());
+        }
+
         // GET: QAPairs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
