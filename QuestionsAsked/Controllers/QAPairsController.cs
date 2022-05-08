@@ -20,7 +20,10 @@ namespace QuestionsAsked.Controllers
         {
             _context = context;
         }
-
+        
+        //TODO EMAIL SENDER ON REGISTRATION
+        //TODO ALTERNATIVE REGISTRATION METHODS
+        
         // GET: QAPairs
         public async Task<IActionResult> Index()
         {
