@@ -6,11 +6,31 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.AddAuthentication().AddGoogle(googleOptions =>
-{
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-});
+services.AddAuthentication()
+    .AddGoogle(googleOptions =>
+    {
+        IConfigurationSection googleAuthNSection =
+            configuration.GetSection("Authentication:Google");
+        googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+        googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+    })
+    .AddFacebook(facebookOptions =>
+    {
+        IConfigurationSection FBAuthNSection =
+            configuration.GetSection("Authentication:FB");
+        facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
+        facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+    });
+//TODO ADD GITHUB AUTHENTICATION
+//TODO ADD LINKEDIN AUTHENTICATION
+//TODO TRY TWITTER AUTHENTICATION AGAIN
+
+//     .AddTwitter(twitterOptions =>
+// {
+//     twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
+//     twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
+//     twitterOptions.RetrieveUserDetails = true;
+// })
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
