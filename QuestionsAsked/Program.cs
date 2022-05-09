@@ -21,8 +21,11 @@ services.AddAuthentication()
         facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
         facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
     });
+
 //TODO ADD GITHUB AUTHENTICATION
+
 //TODO ADD LINKEDIN AUTHENTICATION
+
 //TODO TRY TWITTER AUTHENTICATION AGAIN
 
 //     .AddTwitter(twitterOptions =>
