@@ -22,19 +22,6 @@ services.AddAuthentication()
         facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
     });
 
-//TODO ADD GITHUB AUTHENTICATION
-
-//TODO ADD LINKEDIN AUTHENTICATION
-
-//TODO TRY TWITTER AUTHENTICATION AGAIN
-
-//     .AddTwitter(twitterOptions =>
-// {
-//     twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
-//     twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
-//     twitterOptions.RetrieveUserDetails = true;
-// })
-
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
