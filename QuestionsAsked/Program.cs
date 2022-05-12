@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using QuestionsAsked.Data;
+using QuestionsAsked.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
+
+services.AddTransient<IEmailSender, EmailSender>();
 
 services.AddAuthentication()
     .AddGoogle(googleOptions =>

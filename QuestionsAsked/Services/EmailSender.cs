@@ -1,39 +1,37 @@
-using System;
-using System.Diagnostics;
-using sib_api_v3_sdk.Api;
-using sib_api_v3_sdk.Client;
-using sib_api_v3_sdk.Model;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
-
-namespace Example
+namespace QuestionsAsked.Services
 {
-    public class Example
+    public class EmailSender : IEmailSender
     {
-        public void main()
+        public EmailSender()
         {
+        
+        }
 
-            // Configure API key authorization: api-key
-            Configuration.Default.ApiKey.Add("api-key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.ApiKeyPrefix.Add("api-key", "Bearer");
-            // Configure API key authorization: partner-key
-            Configuration.Default.ApiKey.Add("partner-key", "YOUR_PARTNER_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.ApiKeyPrefix.Add("partner-key", "Bearer");
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            string fromMail = "iridiumcodes@gmail.com";
+            string fromPassword = "vwsajyadbpmjlotx";
 
-            var apiInstance = new AccountApi();
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = subject;
+            message.To.Add(new MailAddress(email));
+            message.Body = "<html><body>" + htmlMessage + "</html></body>";
+            message.IsBodyHtml = true;
 
-            try
+            var smtpClient = new SmtpClient("smtp.gmail.com")
             {
-                // Get your account information, plan and credits details
-                GetAccount result = apiInstance.GetAccount();
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling AccountApi.GetAccount: " + e.Message );
-            }
-
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+            smtpClient.Send(message);
+            return Task.CompletedTask;
         }
     }
 }
